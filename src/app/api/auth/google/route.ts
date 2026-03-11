@@ -1,29 +1,27 @@
 import { NextResponse } from "next/server";
-
-// Google OAuth 2.0 authorization endpoint
-// In production, set these in .env.local:
-//   GOOGLE_CLIENT_ID=your-client-id
-//   GOOGLE_CLIENT_SECRET=your-client-secret
-//   NEXT_PUBLIC_BASE_URL=http://localhost:3000
+import { getAuthenticatedUser } from "@/lib/get-user";
 
 const GOOGLE_AUTH_URL = "https://accounts.google.com/o/oauth2/v2/auth";
 
 const SCOPES = [
-  "https://www.googleapis.com/auth/analytics.readonly",        // GA4
-  "https://www.googleapis.com/auth/adwords",                    // Google Ads
-  "https://www.googleapis.com/auth/webmasters.readonly",        // Search Console
-  "https://www.googleapis.com/auth/userinfo.email",             // Email
-  "https://www.googleapis.com/auth/userinfo.profile",           // Profile
+  "https://www.googleapis.com/auth/analytics.readonly",
+  "https://www.googleapis.com/auth/adwords",
+  "https://www.googleapis.com/auth/webmasters.readonly",
+  "https://www.googleapis.com/auth/userinfo.email",
+  "https://www.googleapis.com/auth/userinfo.profile",
 ].join(" ");
 
 export async function GET() {
+  const user = await getAuthenticatedUser();
+  if (!user) {
+    return NextResponse.json({ error: "Not authenticated" }, { status: 401 });
+  }
+
   const clientId = process.env.GOOGLE_CLIENT_ID;
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
   if (!clientId) {
-    // Demo mode: simulate the OAuth redirect
-    const demoCallbackUrl = `${baseUrl}/api/auth/google/callback?demo=true`;
-    return NextResponse.redirect(demoCallbackUrl);
+    return NextResponse.redirect(`${baseUrl}/api/auth/google/callback?demo=true`);
   }
 
   const params = new URLSearchParams({
@@ -33,7 +31,7 @@ export async function GET() {
     scope: SCOPES,
     access_type: "offline",
     prompt: "consent",
-    state: crypto.randomUUID(),
+    state: user.id,
   });
 
   return NextResponse.redirect(`${GOOGLE_AUTH_URL}?${params.toString()}`);

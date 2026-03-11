@@ -45,10 +45,16 @@ export default function Home() {
               Connections
             </Link>
             <Link
+              href="/vibe-coder"
+              className="px-3 py-1.5 text-sm text-[#94a3b8] hover:text-white transition-colors"
+            >
+              Vibe Coder
+            </Link>
+            <Link
               href="/report"
               className="px-3 py-1.5 text-sm text-[#94a3b8] hover:text-white transition-colors"
             >
-              Overall Report
+              Report
             </Link>
             <Link
               href="/setup-guide"

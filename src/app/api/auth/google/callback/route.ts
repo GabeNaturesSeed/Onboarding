@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { setGoogleAuth } from "@/lib/auth-store";
+import { getAuthenticatedUser } from "@/lib/get-user";
+import { updateUserConnection } from "@/lib/user-store";
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
@@ -7,19 +8,18 @@ export async function GET(request: NextRequest) {
   const demo = searchParams.get("demo");
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
+  const user = await getAuthenticatedUser();
+  if (!user) {
+    return NextResponse.redirect(`${baseUrl}/auth/login`);
+  }
+
   if (demo) {
-    // Demo mode: simulate a successful OAuth with mock data
-    setGoogleAuth({
+    updateUserConnection(user.id, "google", {
       accessToken: "demo_access_token",
       refreshToken: "demo_refresh_token",
       expiresAt: Date.now() + 3600 * 1000,
       email: "you@gmail.com",
-      scopes: [
-        "analytics.readonly",
-        "adwords",
-        "webmasters.readonly",
-        "userinfo.email",
-      ],
+      scopes: ["analytics.readonly", "adwords", "webmasters.readonly", "userinfo.email"],
     });
     return NextResponse.redirect(`${baseUrl}/connections?google=connected`);
   }
@@ -28,7 +28,6 @@ export async function GET(request: NextRequest) {
     return NextResponse.redirect(`${baseUrl}/connections?error=no_code`);
   }
 
-  // Exchange the authorization code for tokens
   const clientId = process.env.GOOGLE_CLIENT_ID!;
   const clientSecret = process.env.GOOGLE_CLIENT_SECRET!;
 
@@ -46,22 +45,20 @@ export async function GET(request: NextRequest) {
     });
 
     const tokens = await tokenRes.json();
-
     if (!tokenRes.ok) {
       return NextResponse.redirect(`${baseUrl}/connections?error=token_exchange`);
     }
 
-    // Get user info
     const userRes = await fetch("https://www.googleapis.com/oauth2/v2/userinfo", {
       headers: { Authorization: `Bearer ${tokens.access_token}` },
     });
-    const user = await userRes.json();
+    const googleUser = await userRes.json();
 
-    setGoogleAuth({
+    updateUserConnection(user.id, "google", {
       accessToken: tokens.access_token,
       refreshToken: tokens.refresh_token,
       expiresAt: Date.now() + tokens.expires_in * 1000,
-      email: user.email,
+      email: googleUser.email,
       scopes: (tokens.scope || "").split(" "),
     });
 
