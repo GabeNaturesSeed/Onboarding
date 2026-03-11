@@ -39,6 +39,18 @@ export default function Home() {
           </div>
           <div className="flex items-center gap-3">
             <Link
+              href="/connections"
+              className="px-3 py-1.5 text-sm text-[#94a3b8] hover:text-white transition-colors"
+            >
+              Connections
+            </Link>
+            <Link
+              href="/report"
+              className="px-3 py-1.5 text-sm text-[#94a3b8] hover:text-white transition-colors"
+            >
+              Overall Report
+            </Link>
+            <Link
               href="/setup-guide"
               className="px-3 py-1.5 text-sm text-[#94a3b8] hover:text-white transition-colors"
             >
