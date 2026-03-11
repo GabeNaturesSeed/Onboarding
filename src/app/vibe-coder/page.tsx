@@ -128,9 +128,14 @@ function VibeCoderContent() {
               <h1 className="text-lg font-bold text-white">Vibe Coder</h1>
             </div>
           </div>
-          <Link href="/report" className="px-3 py-1.5 text-sm text-[#94a3b8] hover:text-white border border-[#334155] rounded-lg transition-colors">
-            Overall Report
-          </Link>
+          <div className="flex items-center gap-2">
+            <Link href="/klaviyo-flows" className="px-3 py-1.5 text-sm text-[#94a3b8] hover:text-white border border-[#334155] rounded-lg transition-colors">
+              Klaviyo Flows
+            </Link>
+            <Link href="/report" className="px-3 py-1.5 text-sm text-[#94a3b8] hover:text-white border border-[#334155] rounded-lg transition-colors">
+              Overall Report
+            </Link>
+          </div>
         </div>
       </header>
 
@@ -242,9 +247,9 @@ function VibeCoderContent() {
                       </div>
                       <span className={`text-sm ${i <= downloadStep ? "text-white" : "text-[#64748b]"}`}>
                         {step}
-                        {i === 4 && i <= downloadStep && <span className="ml-2 text-[#8b5cf6]">CLAUDE.md, settings.json, .mcp.json</span>}
+                        {i === 4 && i <= downloadStep && <span className="ml-2 text-[#8b5cf6]">CLAUDE.md, HANDOFF.md, KICKSTART.md, .mcp.json</span>}
                         {i === 5 && i <= downloadStep && <span className="ml-2 text-[#8b5cf6]">filesystem, puppeteer, fetch, {platform === "shopify" ? "shopify" : "mysql"}, memory</span>}
-                        {i === 6 && i <= downloadStep && <span className="ml-2 text-[#8b5cf6]">6 skills, 3 rule sets</span>}
+                        {i === 6 && i <= downloadStep && <span className="ml-2 text-[#8b5cf6]">8 skills, 4 rule sets</span>}
                       </span>
                     </div>
                   ))}
@@ -256,11 +261,14 @@ function VibeCoderContent() {
                     <div className="bg-[#0f172a] rounded-lg p-3 font-mono text-xs text-[#e2e8f0] space-y-0.5">
                       <p className="text-[#64748b] mb-1"># Project structure:</p>
                       <p className="text-[#f59e0b]">CLAUDE.md</p>
+                      <p className="text-[#10b981]">HANDOFF.md</p>
+                      <p className="text-[#10b981]">KICKSTART.md</p>
                       <p className="text-[#f59e0b]">.mcp.json</p>
                       <p className="text-[#8b5cf6]">.claude/</p>
                       <p className="text-[#8b5cf6]">&nbsp; settings.json</p>
                       <p className="text-[#8b5cf6]">&nbsp; rules/</p>
                       <p className="text-[#8b5cf6]">&nbsp; &nbsp; theme-standards.md</p>
+                      <p className="text-[#8b5cf6]">&nbsp; &nbsp; lean-theme.md</p>
                       <p className="text-[#8b5cf6]">&nbsp; &nbsp; performance.md</p>
                       <p className="text-[#8b5cf6]">&nbsp; &nbsp; seo-accessibility.md</p>
                       <p className="text-[#8b5cf6]">&nbsp; skills/</p>
@@ -270,6 +278,8 @@ function VibeCoderContent() {
                       <p className="text-[#8b5cf6]">&nbsp; &nbsp; new-section.md</p>
                       <p className="text-[#8b5cf6]">&nbsp; &nbsp; performance-audit.md</p>
                       <p className="text-[#8b5cf6]">&nbsp; &nbsp; seo-audit.md</p>
+                      <p className="text-[#8b5cf6]">&nbsp; &nbsp; strip.md</p>
+                      <p className="text-[#8b5cf6]">&nbsp; &nbsp; cro-review.md</p>
                       {storePlatform === "shopify" ? (
                         <>
                           <p className="text-[#e2e8f0] mt-1">assets/</p>
@@ -329,18 +339,22 @@ function VibeCoderContent() {
                     <p className="text-sm text-[#94a3b8] mb-3">
                       Your theme will be downloaded with a complete Claude Code environment pre-configured for {storePlatform === "shopify" ? "Shopify Liquid" : "WooCommerce/WordPress PHP"} development:
                     </p>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-3 mb-4">
                       <div className="bg-[#1e293b] rounded-lg p-3 border border-[#334155]">
-                        <p className="text-xs font-semibold text-[#f59e0b] mb-1">CLAUDE.md</p>
-                        <p className="text-xs text-[#94a3b8]">Full project context, commands, conventions, image handling, SEO, accessibility, and git workflow</p>
+                        <p className="text-xs font-semibold text-[#f59e0b] mb-1">CLAUDE.md + Lean Philosophy</p>
+                        <p className="text-xs text-[#94a3b8]">Project context, CRO principles, theme stripping checklist, self-evolving system</p>
                       </div>
                       <div className="bg-[#1e293b] rounded-lg p-3 border border-[#334155]">
-                        <p className="text-xs font-semibold text-[#8b5cf6] mb-1">MCP Servers</p>
+                        <p className="text-xs font-semibold text-[#10b981] mb-1">HANDOFF + KICKSTART</p>
+                        <p className="text-xs text-[#94a3b8]">Client handoff docs, daily workflows, and a first prompt that begins the theme audit</p>
+                      </div>
+                      <div className="bg-[#1e293b] rounded-lg p-3 border border-[#334155]">
+                        <p className="text-xs font-semibold text-[#8b5cf6] mb-1">6 MCP Servers</p>
                         <p className="text-xs text-[#94a3b8]">Filesystem, Puppeteer, Fetch, {storePlatform === "shopify" ? "Shopify API" : "MySQL + WC API"}, Sequential Thinking, Memory</p>
                       </div>
                       <div className="bg-[#1e293b] rounded-lg p-3 border border-[#334155]">
-                        <p className="text-xs font-semibold text-[#3b82f6] mb-1">Skills & Rules</p>
-                        <p className="text-xs text-[#94a3b8]">6 slash commands (/dev, /lint, /deploy, /new-section, /performance-audit, /seo-audit) + 3 rule sets</p>
+                        <p className="text-xs font-semibold text-[#3b82f6] mb-1">8 Skills + 4 Rules</p>
+                        <p className="text-xs text-[#94a3b8]">/dev, /lint, /deploy, /new-section, /performance-audit, /seo-audit, /strip, /cro-review</p>
                       </div>
                     </div>
                   </div>
@@ -436,11 +450,13 @@ function VibeCoderContent() {
                 color: "#3b82f6",
                 items: [
                   { cmd: "/dev", desc: `Start ${platform === "shopify" ? "Shopify theme" : "WooCommerce"} dev server` },
-                  { cmd: "/lint", desc: `Run ${platform === "shopify" ? "theme check" : "PHPCS + ESLint"}` },
+                  { cmd: "/strip", desc: "Find and remove all unused code, CSS, JS, fonts" },
+                  { cmd: "/cro-review", desc: "Screenshot + conversion audit of any page" },
                   { cmd: "/deploy", desc: "Build and push theme to store" },
-                  { cmd: "/new-section", desc: `Scaffold a new ${platform === "shopify" ? "Liquid section" : "template part"}` },
+                  { cmd: "/new-section", desc: `Scaffold a new lean ${platform === "shopify" ? "Liquid section" : "template part"}` },
                   { cmd: "/performance-audit", desc: "Full Core Web Vitals audit" },
                   { cmd: "/seo-audit", desc: "SEO and structured data check" },
+                  { cmd: "/lint", desc: `Run ${platform === "shopify" ? "theme check" : "PHPCS + ESLint"}` },
                 ],
               },
               {
@@ -459,8 +475,9 @@ function VibeCoderContent() {
                 title: "Rule Sets",
                 color: "#f97316",
                 items: [
+                  { cmd: "Lean Theme", desc: "Strip-to-essentials philosophy, performance budgets, audit process" },
                   { cmd: "Theme Standards", desc: `${platform === "shopify" ? "Liquid" : "PHP/WordPress"} coding conventions enforced` },
-                  { cmd: "Performance", desc: "Core Web Vitals targets, image/CSS/JS guidelines" },
+                  { cmd: "Performance", desc: "Core Web Vitals targets, image/CSS/JS optimization" },
                   { cmd: "SEO + A11y", desc: "Structured data, WCAG 2.1 AA compliance" },
                 ],
               },
@@ -468,11 +485,11 @@ function VibeCoderContent() {
                 title: "Example Prompts",
                 color: "#8b5cf6",
                 items: [
-                  { cmd: `"Add a ${platform === "shopify" ? "featured collection section" : "product grid component"}"`, desc: "Creates section with schema, CSS, and JS" },
-                  { cmd: "\"Optimize images for performance\"", desc: "Audits and fixes lazy loading, srcset, WebP" },
-                  { cmd: "\"Add product structured data\"", desc: "Generates JSON-LD for Google rich results" },
-                  { cmd: "\"Fix mobile layout on product page\"", desc: "Inspects via Puppeteer, fixes responsive CSS" },
-                  { cmd: "\"Run full audit before launch\"", desc: "Performance + SEO + accessibility checks" },
+                  { cmd: "Paste KICKSTART.md", desc: "Full initial audit — understand, baseline, identify bloat, plan" },
+                  { cmd: "\"Strip everything unnecessary\"", desc: "Removes dead CSS, JS, sections, fonts — measures impact" },
+                  { cmd: "\"CRO review my product page\"", desc: "Screenshots mobile/desktop, checks above-fold, trust signals" },
+                  { cmd: "\"Fix mobile layout\"", desc: "Puppeteer screenshots, diagnoses responsive issues, fixes" },
+                  { cmd: `"What are my ${platform === "shopify" ? "top products" : "best sellers"}?"`, desc: "Queries your store API/database directly" },
                 ],
               },
             ].map((section) => (
