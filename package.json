@@ -1,31 +1,29 @@
 {
-  "name": "onboarding",
+  "name": "gabegs-platform",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "private": true,
+  "description": "GabeGS — AI-Powered E-Commerce Growth Platform",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
-  "repository": {
-    "type": "git",
-    "url": "http://local_proxy@127.0.0.1:37857/git/GabeNaturesSeed/Onboarding"
+  "engines": {
+    "node": ">=18.18.0"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
+    "lucide-react": "^0.577.0",
+    "next": "^16.1.6",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "recharts": "^3.8.0"
+  },
+  "devDependencies": {
     "@tailwindcss/postcss": "^4.2.1",
     "@types/node": "^25.4.0",
     "@types/react": "^19.2.14",
-    "lucide-react": "^0.577.0",
-    "next": "^16.1.6",
     "postcss": "^8.5.8",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4",
-    "recharts": "^3.8.0",
     "tailwindcss": "^4.2.1",
     "typescript": "^5.9.3"
   }

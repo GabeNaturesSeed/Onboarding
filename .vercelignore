@@ -1,0 +1,9 @@
+.git
+.github
+.vscode
+.claude
+*.md
+!README.md
+CLAUDE.md
+KICKSTART.md
+HANDOFF.md
