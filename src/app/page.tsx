@@ -45,22 +45,22 @@ export default function Home() {
               Connections
             </Link>
             <Link
+              href="/merchant-center"
+              className="px-3 py-1.5 text-sm text-[#94a3b8] hover:text-white transition-colors"
+            >
+              Merchant Center
+            </Link>
+            <Link
               href="/vibe-coder"
               className="px-3 py-1.5 text-sm text-[#94a3b8] hover:text-white transition-colors"
             >
               Vibe Coder
             </Link>
             <Link
-              href="/report"
-              className="px-3 py-1.5 text-sm text-[#94a3b8] hover:text-white transition-colors"
+              href="/admin"
+              className="px-3 py-1.5 text-sm text-[#f59e0b] hover:text-white transition-colors font-medium"
             >
-              Report
-            </Link>
-            <Link
-              href="/setup-guide"
-              className="px-3 py-1.5 text-sm text-[#94a3b8] hover:text-white transition-colors"
-            >
-              Setup Guide
+              Admin
             </Link>
             <Link
               href="/environment/new"
